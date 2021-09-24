@@ -1,6 +1,6 @@
 name: google_geocoding_api
 description: This Package implement Google Geocoding API
-version: 1.0.0
+version: 1.0.1
 homepage: https://github.com/Dimolll/google_geocoding_api
 publish_to: https://pub.dev
 

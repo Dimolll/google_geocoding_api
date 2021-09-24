@@ -2,7 +2,8 @@ import 'package:google_geocoding_api/google_geocoding_api.dart';
 
 Future<void> main() async {
   const String googelApiKey = 'YOUR_API_KEY';
-  final api = GoogleGeocodingApi(googelApiKey);
+  final bool isDebugMode = true;
+  final api = GoogleGeocodingApi(googelApiKey, isLogged: isDebugMode);
   final searchResults = await api.search(
     'Boston',
     language: 'en',
