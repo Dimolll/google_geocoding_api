@@ -2,6 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:google_geocoding_api/src/api/api_key_interceptor.dart';
 import 'package:google_geocoding_api/src/entities/gecoding_response.dart';
 
+/// Api class with default and reverse searching
 class GoogleGeocodingApi {
   GoogleGeocodingApi(String apiKey, {bool isLogged = false})
       : _dio = Dio()
@@ -21,6 +22,7 @@ class GoogleGeocodingApi {
   static const String _baseUrl =
       'https://maps.googleapis.com/maps/api/geocode/json?';
 
+  /// Classic Geosearch
   Future<GoogleGeocodingResponse> search(
     String address, {
     String? bounds,
@@ -44,6 +46,7 @@ class GoogleGeocodingApi {
     return GoogleGeocodingResponse.fromJson(response.data!);
   }
 
+  /// Reverse Geosearch
   Future<GoogleGeocodingResponse> reverse(
     String latlng, {
     String? locationType,
