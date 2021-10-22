@@ -20,5 +20,8 @@ class GoogleGeocodingGeometry {
       );
   final GoogleGeocodingLocation location;
   final String locationType;
+
+  /// More info at
+  /// https://developers.google.com/maps/documentation/geocoding/overview#Viewports
   final GoogleGeocodingViewport viewport;
 }

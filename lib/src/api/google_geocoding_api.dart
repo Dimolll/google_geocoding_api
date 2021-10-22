@@ -28,6 +28,9 @@ class GoogleGeocodingApi {
     String? bounds,
     String? language,
     String? region,
+
+    /// More info at
+    /// https://developers.google.com/maps/documentation/geocoding/overview#component-filtering
     String? components,
   }) async {
     final Map<String, dynamic> query = <String, dynamic>{
