@@ -1,3 +1,7 @@
+## 1.1.0
+
+* Update packages and minimum dart sdk version
+
 ## 1.0.1+2
 
 * Add docs for open API elements

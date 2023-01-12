@@ -6,16 +6,18 @@ import 'package:google_geocoding_api/src/entities/gecoding_response.dart';
 class GoogleGeocodingApi {
   GoogleGeocodingApi(String apiKey, {bool isLogged = false})
       : _dio = Dio()
-          ..interceptors.addAll([
-            ApiKeyInterceptor(apiKey),
-            if (isLogged)
-              LogInterceptor(
-                responseBody: true,
-                requestBody: true,
-                requestHeader: true,
-                responseHeader: false,
-              ),
-          ]);
+          ..interceptors.addAll(
+            [
+              ApiKeyInterceptor(apiKey),
+              if (isLogged)
+                LogInterceptor(
+                  responseBody: true,
+                  requestBody: true,
+                  requestHeader: true,
+                  responseHeader: false,
+                ),
+            ],
+          );
 
   final Dio _dio;
 
