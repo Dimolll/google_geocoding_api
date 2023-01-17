@@ -1,3 +1,7 @@
+## 1.2.0
+
+* Fix NPE Error(make some String fields empty by default)
+
 ## 1.1.0
 
 * Update packages and minimum dart sdk version

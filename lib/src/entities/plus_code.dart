@@ -8,8 +8,8 @@ class GoogleGeocodingPlusCode {
   /// [GoogleGeocodingPlusCode] From Json factory
   factory GoogleGeocodingPlusCode.fromJson(Map<String, dynamic> json) =>
       GoogleGeocodingPlusCode(
-        compoundCode: json['compound_code'] as String,
-        globalCode: json['global_code'] as String,
+        compoundCode: json['compound_code'] as String? ?? '',
+        globalCode: json['global_code'] as String? ?? '',
       );
 
   /// is a 6 character or longer local code with an explicit location

@@ -13,7 +13,7 @@ class GoogleGeocodingGeometry {
         location: GoogleGeocodingLocation.fromJson(
           json['location'] as Map<String, dynamic>,
         ),
-        locationType: json['location_type'] as String,
+        locationType: json['location_type'] as String? ?? '',
         viewport: GoogleGeocodingViewport.fromJson(
           json['viewport'] as Map<String, dynamic>,
         ),
