@@ -72,4 +72,31 @@ class GoogleGeocodingApi {
     );
     return GoogleGeocodingResponse.fromJson(response.data!);
   }
+
+  /// Decode place from place id 
+  /// https://developers.google.com/maps/documentation/geocoding/requests-places-geocoding
+  Future<GoogleGeocodingResponse> decodePlace(String placeId,{
+    String? language, 
+    String? resultType, 
+    String? region, 
+    String? locationType, 
+  }) async {
+     final Map<String, dynamic> query = <String, dynamic>{
+      'place_id':placeId, 
+      'language': language,
+      'result_type': resultType,
+      'location_type': locationType,
+      'region': region, 
+    };
+
+    query.removeWhere((_, dynamic value) => value == null);
+
+    final Response<Map<String, dynamic>> response =
+        await _dio.get<Map<String, dynamic>>(
+      _baseUrl,
+      queryParameters: query,
+    );
+    return GoogleGeocodingResponse.fromJson(response.data!);
+  }
+
 }
