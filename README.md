@@ -1,7 +1,7 @@
 ## Introduction
 
 This package implement [Google Geocoding API][geocoding_link] with only dart dependency(without flutter).  
-Before working with the plugin, be sure to read [Before you begin][before_begin] and create an API key in Google Developer Console.
+Before working with the package, be sure to read [Before you begin][before_begin] and create an API key in Google Developer Console.
 
 [geocoding_link]: https://developers.google.com/maps/documentation/geocoding/overview#Geocoding
 [before_begin]: https://developers.google.com/maps/documentation/geocoding/overview#before-you-begin 

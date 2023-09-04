@@ -1,3 +1,7 @@
+## 1.4.1
+
+* README.md fixes
+
 ## 1.4.0
 
 * Added Place Geocoding (Thanks for [@dkolacki](https://github.com/dkolacki))
