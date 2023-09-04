@@ -25,6 +25,7 @@ class GoogleGeocodingApi {
       'https://maps.googleapis.com/maps/api/geocode/json?';
 
   /// Classic Geosearch
+  /// https://developers.google.com/maps/documentation/geocoding/requests-geocoding
   Future<GoogleGeocodingResponse> search(
     String address, {
     String? bounds,
@@ -42,7 +43,9 @@ class GoogleGeocodingApi {
       'region': region,
       'components': components,
     };
+
     query.removeWhere((_, dynamic value) => value == null);
+
     final Response<Map<String, dynamic>> response =
         await _dio.get<Map<String, dynamic>>(
       _baseUrl,
@@ -52,6 +55,7 @@ class GoogleGeocodingApi {
   }
 
   /// Reverse Geosearch
+  /// https://developers.google.com/maps/documentation/geocoding/requests-reverse-geocoding
   Future<GoogleGeocodingResponse> reverse(
     String latlng, {
     String? locationType,
@@ -64,7 +68,9 @@ class GoogleGeocodingApi {
       'result_type': resultType,
       'location_type': locationType,
     };
+
     query.removeWhere((_, dynamic value) => value == null);
+
     final Response<Map<String, dynamic>> response =
         await _dio.get<Map<String, dynamic>>(
       _baseUrl,
@@ -73,20 +79,21 @@ class GoogleGeocodingApi {
     return GoogleGeocodingResponse.fromJson(response.data!);
   }
 
-  /// Decode place from place id 
+  /// Decode place from place id
   /// https://developers.google.com/maps/documentation/geocoding/requests-places-geocoding
-  Future<GoogleGeocodingResponse> decodePlace(String placeId,{
-    String? language, 
-    String? resultType, 
-    String? region, 
-    String? locationType, 
+  Future<GoogleGeocodingResponse> placeGeocoding(
+    String placeId, {
+    String? language,
+    String? resultType,
+    String? region,
+    String? locationType,
   }) async {
-     final Map<String, dynamic> query = <String, dynamic>{
-      'place_id':placeId, 
+    final Map<String, dynamic> query = <String, dynamic>{
+      'place_id': placeId,
       'language': language,
       'result_type': resultType,
       'location_type': locationType,
-      'region': region, 
+      'region': region,
     };
 
     query.removeWhere((_, dynamic value) => value == null);
@@ -98,5 +105,4 @@ class GoogleGeocodingApi {
     );
     return GoogleGeocodingResponse.fromJson(response.data!);
   }
-
 }

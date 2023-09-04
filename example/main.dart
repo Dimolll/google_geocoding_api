@@ -14,4 +14,9 @@ Future<void> main() async {
     language: 'en',
   );
   print(reversedSearchResults);
+  final placeSearchResults = await api.placeGeocoding(
+    'ChIJd8BlQ2BZwokRAFUEcm_qrcA',
+    language: 'en',
+  );
+  print(placeSearchResults);
 }

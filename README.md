@@ -45,6 +45,25 @@ Future<void> main() async {
 
 ```
 
+### Place geocoding
+This is example code how to use Place Geocoding. Before use it please read [Place Geocoding][place_geocoding]
+
+[place_geocoding]:https://developers.google.com/maps/documentation/geocoding/requests-places-geocoding
+``` Dart
+import 'package:google_geocoding_api/google_geocoding_api.dart';
+
+Future<void> main() async {
+  const String googelApiKey = 'YOUR_API_KEY';
+  final bool isDebugMode = true;  
+  final api = GoogleGeocodingApi(googelApiKey, isLogged: isDebugMode);  
+  final placeSearchResults = await api.placeGeocoding(
+    'ChIJd8BlQ2BZwokRAFUEcm_qrcA',
+    language: 'en',
+  );
+}
+
+```
+
 
 ## Contact and bugs
 Use [Issue Tracker][issue_tracker] for any questions or bug reports.

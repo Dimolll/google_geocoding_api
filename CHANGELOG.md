@@ -1,6 +1,12 @@
+## 1.4.0
+
+* Added Place Geocoding (Thanks for [@dkolacki](https://github.com/dkolacki))
+* Update dependencies
+
 ## 1.3.0
 
-* Update **dio** to latest version 5.0.1 
+* Update **dio** to latest version 5.0.1.
+
 ## 1.2.0
 
 * Fix NPE Error(make some String fields empty by default)
