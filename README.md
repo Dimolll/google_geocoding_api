@@ -1,3 +1,14 @@
+<p align="center">
+<a href="https://pub.dev/packages/google_geocoding_api"><img src="https://img.shields.io/pub/v/google_geocoding_api.svg?style=flat" alt="Pub"></a>
+<a href="https://opensource.org/licenses/MIT"><img src="https://img.shields.io/badge/license-MIT-purple.svg" alt="License: MIT"></a>
+</p>
+
+<p align="center">                  
+<a href="https://www.buymeacoffee.com/dimoll" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me A Coffee" height="30px" width= "108px"></a>                  
+</p>
+
+---
+
 ## Introduction
 
 This package implement [Google Geocoding API][geocoding_link] with only dart dependency(without flutter).  
@@ -64,6 +75,37 @@ Future<void> main() async {
 
 ```
 
+
+### Pretty Address
+Now you can use `.mapToPretty()` to get an instance of 
+`GeocodingPrettyAddress` instance containing `address`, `city`, `country`, `latitude`, `longitude`, `postalCode`, `state`, `countryCode`, `streetNumber`, `streetName`, `placeId`.
+
+**Attention**: The feature is experimental and may not work exactly as you need. Any suggestions for improvement may be written in the [Issue Tracker][issue_tracker].
+
+``` Dart
+  final placeSearchResults = await api.placeGeocoding(
+    'ChIJd8BlQ2BZwokRAFUEcm_qrcA',
+    language: 'en',
+  );
+  
+  final prettyAddress = placeSearchResults.results.firstOrNull?.mapToPretty();
+
+  if (prettyAddress == null) {
+    return null;
+  }
+
+  print(prettyAddress.postalCode);
+  print(prettyAddress.streetNumber);
+  print(prettyAddress.streetName);
+  print(prettyAddress.city);
+  print(prettyAddress.state);
+  print(prettyAddress.placeId);
+  print(prettyAddress.country);
+  print(prettyAddress.address);
+  print(prettyAddress.countryCode);
+  print(prettyAddress.latitude);
+  print(prettyAddress.longitude);
+```
 
 ## Contact and bugs
 Use [Issue Tracker][issue_tracker] for any questions or bug reports.

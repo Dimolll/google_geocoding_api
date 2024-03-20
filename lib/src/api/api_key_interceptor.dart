@@ -2,7 +2,7 @@ import 'package:dio/dio.dart';
 
 /// This class [ApiKeyInterceptor] is responsible for adding an api key to every request.
 class ApiKeyInterceptor extends Interceptor {
-  ApiKeyInterceptor(this._apiKey) : super();
+  ApiKeyInterceptor(this._apiKey);
 
   final String _apiKey;
 

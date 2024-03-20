@@ -1,11 +1,18 @@
 import 'package:dio/dio.dart';
 import 'package:google_geocoding_api/src/api/api_key_interceptor.dart';
-import 'package:google_geocoding_api/src/entities/gecoding_response.dart';
+import 'package:google_geocoding_api/src/entities/response/gecoding_response.dart';
+import 'package:google_geocoding_api/src/entities/response/response_status_code_enum.dart';
+import 'package:google_geocoding_api/src/exceptions/bad_reponse_exception.dart';
+import 'package:google_geocoding_api/src/exceptions/wrong_status_exception.dart';
 
 /// Api class with default and reverse searching
 class GoogleGeocodingApi {
-  GoogleGeocodingApi(String apiKey, {bool isLogged = false})
-      : _dio = Dio()
+  GoogleGeocodingApi(
+    String apiKey, {
+    bool isLogged = false,
+    Iterable<Interceptor>? interceptors,
+    Dio? dio,
+  }) : _dio = (dio ?? Dio())
           ..interceptors.addAll(
             [
               ApiKeyInterceptor(apiKey),
@@ -16,6 +23,7 @@ class GoogleGeocodingApi {
                   requestHeader: true,
                   responseHeader: false,
                 ),
+              if (interceptors != null) ...interceptors,
             ],
           );
 
@@ -38,20 +46,18 @@ class GoogleGeocodingApi {
   }) async {
     final Map<String, dynamic> query = <String, dynamic>{
       'address': address.replaceAll(' ', '+'),
-      'bounds': bounds,
-      'language': language,
-      'region': region,
-      'components': components,
+      if (bounds != null) 'bounds': bounds,
+      if (language != null) 'language': language,
+      if (region != null) 'region': region,
+      if (components != null) 'components': components,
     };
-
-    query.removeWhere((_, dynamic value) => value == null);
 
     final Response<Map<String, dynamic>> response =
         await _dio.get<Map<String, dynamic>>(
       _baseUrl,
       queryParameters: query,
     );
-    return GoogleGeocodingResponse.fromJson(response.data!);
+    return _mapOrThrow(response.data!);
   }
 
   /// Reverse Geosearch
@@ -64,19 +70,17 @@ class GoogleGeocodingApi {
   }) async {
     final Map<String, dynamic> query = <String, dynamic>{
       'latlng': latlng,
-      'language': language,
-      'result_type': resultType,
-      'location_type': locationType,
+      if (language != null) 'language': language,
+      if (resultType != null) 'result_type': resultType,
+      if (locationType != null) 'location_type': locationType,
     };
-
-    query.removeWhere((_, dynamic value) => value == null);
 
     final Response<Map<String, dynamic>> response =
         await _dio.get<Map<String, dynamic>>(
       _baseUrl,
       queryParameters: query,
     );
-    return GoogleGeocodingResponse.fromJson(response.data!);
+    return _mapOrThrow(response.data!);
   }
 
   /// Decode place from place id
@@ -90,19 +94,30 @@ class GoogleGeocodingApi {
   }) async {
     final Map<String, dynamic> query = <String, dynamic>{
       'place_id': placeId,
-      'language': language,
-      'result_type': resultType,
-      'location_type': locationType,
-      'region': region,
+      if (language != null) 'language': language,
+      if (resultType != null) 'result_type': resultType,
+      if (locationType != null) 'location_type': locationType,
+      if (region != null) 'region': region,
     };
-
-    query.removeWhere((_, dynamic value) => value == null);
 
     final Response<Map<String, dynamic>> response =
         await _dio.get<Map<String, dynamic>>(
       _baseUrl,
       queryParameters: query,
     );
-    return GoogleGeocodingResponse.fromJson(response.data!);
+    return _mapOrThrow(response.data!);
+  }
+
+  GoogleGeocodingResponse _mapOrThrow(Map<String, dynamic>? json) {
+    if (json == null) {
+      throw GoogleGeocodingBadResponseException();
+    }
+    final response = GoogleGeocodingResponse.fromJson(json);
+
+    if (response.status == GoogleResponseStatusCode.ok) {
+      return response;
+    }
+
+    throw GoogleGeodocingWrongStatusException(response.status);
   }
 }
