@@ -1,5 +1,4 @@
 import 'package:google_geocoding_api/google_geocoding_api.dart';
-import 'package:google_geocoding_api/src/utils/pretty_address_mapper.dart';
 
 Future<void> main() async {
   const String googelApiKey = 'YOUR_API_KEY';

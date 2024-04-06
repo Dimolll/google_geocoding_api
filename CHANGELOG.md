@@ -1,8 +1,10 @@
+## 1.5.1
+* Fixed library visible files
+
 ## 1.5.0
 * Update dependency
 * Upgrade min dart version to `3.0.0`
 * Add `.mapToPretty()` for pretty address
-
 
 ## 1.4.1
 
