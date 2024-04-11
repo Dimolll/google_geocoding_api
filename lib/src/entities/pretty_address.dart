@@ -6,6 +6,7 @@ class GeocodingPrettyAddress {
   final double longitude;
   final String postalCode;
   final String state;
+  final String stateCode;
   final String countryCode;
   final String streetNumber;
   final String streetName;
@@ -19,6 +20,7 @@ class GeocodingPrettyAddress {
     this.longitude = 0,
     this.postalCode = '',
     this.state = '',
+    this.stateCode = '',
     this.countryCode = '',
     this.streetNumber = '',
     this.streetName = '',
@@ -33,6 +35,7 @@ class GeocodingPrettyAddress {
       'countryCode=$countryCode\n'
       'postalCode=$postalCode\n'
       'state=$state\n'
+      'stateCode=$stateCode\n'
       'streetNumber=$streetNumber\n'
       'streetName=$streetName\n'
       'placeId=$placeId\n'

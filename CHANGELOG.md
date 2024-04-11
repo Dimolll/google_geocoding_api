@@ -1,3 +1,7 @@
+## 1.5.2
+* Fixed city mapping
+* Added state code
+
 ## 1.5.1
 * Fixed library visible files
 

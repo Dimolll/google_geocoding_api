@@ -38,6 +38,7 @@ Future<void> main() async {
   print(prettyAddress.streetName);
   print(prettyAddress.city);
   print(prettyAddress.state);
+  print(prettyAddress.stateCode);
   print(prettyAddress.placeId);
   print(prettyAddress.country);
   print(prettyAddress.address);

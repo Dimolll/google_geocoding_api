@@ -7,16 +7,22 @@ extension PrettyAddressMapperExtension on GoogleGeocodingResult {
     String country = '';
     String postalCode = '';
     String state = '';
+    String stateCode = '';
     String streetNumber = '';
     String streetName = '';
     String countryCode = '';
 
     for (final component in addressComponents) {
       final types = component.types;
-      if (types.contains('locality') && types.contains('political')) {
-        city = component.longName;
-      } else if (types.contains('administrative_area_level_2')) {
-        city = component.longName;
+      if (city.isEmpty) {
+        if (types.contains('locality') && types.contains('political')) {
+          city = component.longName;
+        } else if (types.contains('sublocality') &&
+            types.contains('political')) {
+          city = component.longName;
+        } else if (types.contains('administrative_area_level_2')) {
+          city = component.longName;
+        }
       }
       if (types.contains('country')) {
         country = component.longName;
@@ -27,6 +33,7 @@ extension PrettyAddressMapperExtension on GoogleGeocodingResult {
       }
       if (types.contains('administrative_area_level_1')) {
         state = component.longName;
+        stateCode = component.shortName;
       }
       if (types.contains('street_number')) {
         streetNumber = component.longName;
@@ -46,6 +53,7 @@ extension PrettyAddressMapperExtension on GoogleGeocodingResult {
       placeId: placeId,
       postalCode: postalCode,
       state: state,
+      stateCode: stateCode,
       streetName: streetName,
       streetNumber: streetNumber,
       latitude: location?.lat ?? 0,
