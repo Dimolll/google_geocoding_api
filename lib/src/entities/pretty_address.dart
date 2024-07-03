@@ -11,9 +11,11 @@ class GeocodingPrettyAddress {
   final String streetNumber;
   final String streetName;
   final String placeId;
+  final String neighborhood;
 
   const GeocodingPrettyAddress({
     this.address = '',
+    this.neighborhood = '',
     this.city = '',
     this.country = '',
     this.latitude = 0,
@@ -31,6 +33,7 @@ class GeocodingPrettyAddress {
   String toString() => 'GeocodingPrettyAddress(\n'
       'address=$address\n'
       'city=$city\n'
+      'neighborhood=$neighborhood\n'
       'country=$country\n'
       'countryCode=$countryCode\n'
       'postalCode=$postalCode\n'
