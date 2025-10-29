@@ -12,7 +12,7 @@ class GoogleGeocodingApi {
     bool isLogged = false,
     Iterable<Interceptor>? interceptors,
     Dio? dio,
-  }) : _dio = (dio ?? Dio())
+  }) : _dio = (dio ?? Dio(BaseOptions(baseUrl: _baseUrl)))
           ..interceptors.addAll(
             [
               ApiKeyInterceptor(apiKey),
@@ -29,8 +29,8 @@ class GoogleGeocodingApi {
 
   final Dio _dio;
 
-  static const String _baseUrl =
-      'https://maps.googleapis.com/maps/api/geocode/json?';
+  static const String _baseUrl = 'https://maps.googleapis.com';
+  static const String _pathUrl = '/maps/api/geocode/json?'
 
   /// Classic Geosearch
   /// https://developers.google.com/maps/documentation/geocoding/requests-geocoding
@@ -54,7 +54,7 @@ class GoogleGeocodingApi {
 
     final Response<Map<String, dynamic>> response =
         await _dio.get<Map<String, dynamic>>(
-      _baseUrl,
+      _pathUrl,
       queryParameters: query,
     );
     return _mapOrThrow(response.data!);
@@ -77,7 +77,7 @@ class GoogleGeocodingApi {
 
     final Response<Map<String, dynamic>> response =
         await _dio.get<Map<String, dynamic>>(
-      _baseUrl,
+      _pathUrl,
       queryParameters: query,
     );
     return _mapOrThrow(response.data!);
@@ -102,7 +102,7 @@ class GoogleGeocodingApi {
 
     final Response<Map<String, dynamic>> response =
         await _dio.get<Map<String, dynamic>>(
-      _baseUrl,
+      _pathUrl,
       queryParameters: query,
     );
     return _mapOrThrow(response.data!);
